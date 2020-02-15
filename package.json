@@ -1,0 +1,19 @@
+{
+  "name": "statusfilereader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kimsi1/statusFileReader.git"
+  },
+  "author": "Kimmo Niemi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kimsi1/statusFileReader/issues"
+  },
+  "homepage": "https://github.com/Kimsi1/statusFileReader#readme"
+}
