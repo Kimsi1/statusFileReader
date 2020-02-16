@@ -39,7 +39,7 @@ function getDepends (props){
     var temp1 = props.split('Depends: ');
     
     if(temp1.length < 2){
-        return " No dependencies. ";
+        return "No dependencies.";
     } else {
     
     var temp2 = temp1[1].split(': ');
@@ -89,12 +89,13 @@ for(i=0;i<dataArray.length-1;i++){
 
 let nameAndDependsArray = [];
 
-for(i=0;i<dataArray.length;i++){
+for(i=0;i<dataArray.length+1;i++){
     var name=getPackageName(dataArray[i]);
     console.log(name);
     var depends=getDepends(dataArray[i]);
     nameAndDependsArray[i]={name,depends};
 }
+
 
 
 console.log(nameAndDependsArray);
