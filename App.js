@@ -83,9 +83,9 @@ for(i=0;i<dataArray.length-1;i++){
 console.log(dataArray);
 
 
-console.log(getPackageName(dataArray[2]));
-console.log(getDescription(dataArray[2]));
-console.log(getDepends(dataArray[2]));
+//console.log(getPackageName(dataArray[2]));
+//console.log(getDescription(dataArray[2]));
+//console.log(getDepends(dataArray[2]));
 
 let nameAndDependsArray = [];
 
