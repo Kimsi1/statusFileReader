@@ -91,7 +91,7 @@ let nameAndDependsArray = [];
 
 for(i=0;i<dataArray.length;i++){
     var name=getPackageName(dataArray[i]);
-    var depends=getDepends[dataArray[i]]);
+    var depends=getDepends(dataArray[i]);
     nameAndDependsArray[i]=name,depends;
 }
 
