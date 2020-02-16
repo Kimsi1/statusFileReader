@@ -30,7 +30,31 @@ function getDescription (props){
     return temp3.join('\n ');
 }
 
+function getDepends (props){
+    var temp1 = props.split('Depends: ');
+    
+    if(temp1.length < 2){
+        return " No dependencies. ";
+    } else {
+    
+    var temp2 = temp1[1].split(': ');
+    var temp3 = temp2[0].split("\n ");
+    var temp4 = temp3[temp3.length-1].split('\n');
+    temp3[temp3.length-1] = temp4[0];
 
+    var temp5 = temp3.join('\n ');
+    var temp6 = temp5.split(', ');
+    var temp7 = [];
+    
+    for (i = 0; i<temp6.length;i++){
+        var temp8=temp6[i].split(' (');
+        temp7[i]=temp8[0];
+
+    }
+    return temp7
+
+    }
+}
 
 // https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript/45035939
 
@@ -56,6 +80,6 @@ console.log(dataArray);
 
 console.log(getPackageName(dataArray[2]));
 console.log(getDescription(dataArray[2]));
-
+console.log(getDepends(dataArray[2]));
 
 
