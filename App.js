@@ -80,7 +80,7 @@ for(i=0;i<dataArray.length-1;i++){
 */
 
 
-//console.log(dataArray);
+console.log(dataArray);
 
 
 //console.log(getPackageName(dataArray[2]));
@@ -89,7 +89,7 @@ for(i=0;i<dataArray.length-1;i++){
 
 let nameAndDependsArray = [];
 
-for(i=0;i<dataArray.length+1;i++){
+for(i=0;i<dataArray.length;i++){
     var name=getPackageName(dataArray[i]);
     console.log(name);
     var depends=getDepends(dataArray[i]);
