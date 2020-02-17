@@ -135,7 +135,7 @@ for(let i=0;i<packageArray.length;i++){
     }
 }
 
-if(packageArray[1].getDepends().includes('python')){
+if(packageArray[1].getDepends().includes(packageArray[3].getName())){
     packageArray[3].setRevDepends(packageArray[1].getName());
 }
 
