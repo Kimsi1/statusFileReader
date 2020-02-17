@@ -116,17 +116,20 @@ for(i=0;i<dataArray.length;i++){
 
 }
 
+let testLog = [];
 
 for(i=0;i<packageArray.length;i++){
     
     let testPackage = {
         name: packageArray[i].getName(),
-        dependencies: packageArray[i].getRevDepends(),
+        dependencies: packageArray[i].getDepends(),
         description: packageArray[i].getDescription(),
         revDependencies: packageArray[i].getRevDepends()
 
     }
 
-    console.log(JSON.stringify(testPackage));
+    testLog.push(JSON.stringify(testPackage));
     
 }
+
+console.log(testLog);
