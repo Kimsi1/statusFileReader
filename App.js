@@ -98,21 +98,13 @@ class Package {
 
 /*
 var fixedDataArray = [];
-
-
 for(i=0;i<dataArray.length-1;i++){
     fixedDataArray[i] = dataArray[i].concat("EndOfBlock");
     
 }
 
-
-let nameAndDependsArray = [];
-
-
-console.log(nameAndDependsArray);
-
-
 */
+
 
 let packageArray = [];
 
@@ -123,15 +115,16 @@ for(i=0;i<dataArray.length;i++){
 
 }
 
-/*
-console.log(dataArray);
-console.log(getPackageName(dataArray[2]));
-console.log(getDescription(dataArray[2]));
-console.log(getDepends(dataArray[2]));
 
 
-*/
 for(i=0;i<packageArray.length;i++){
     let testName = packageArray[i].getName();
+    let testDesc = packageArray[i].getDescription();
+    let testDep = packageArray[i].getDepends();
+    let testRevDep = packageArray[i].getRevDepends();
+
     console.log(testName);
+    console.log(testDesc);
+    console.log(testDep);
+    console.log(testRevDep);
 }
