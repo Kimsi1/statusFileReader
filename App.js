@@ -4,7 +4,7 @@ const fs = require('fs')
 
 function getData() {
     try {
-        const data = fs.readFileSync('statusLess.real', 'utf8');
+        const data = fs.readFileSync('status.real', 'utf8');
         return data;
         
       } catch (err) {
