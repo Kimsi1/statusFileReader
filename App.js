@@ -146,4 +146,4 @@ console.log(packageArray);
 
 console.log(packageArray[2].getDepends());
 
-console.log(testPackage);
+console.log(testLog);
