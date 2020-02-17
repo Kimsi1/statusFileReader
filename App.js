@@ -61,7 +61,7 @@ class Package {
       var temp7 = [];
       
       for(i=0;i<temp6.length;i++){
-        temp8=temp6.replace(/\s*\(.*?\)\s*/g, '');
+        temp8=temp6[i].replace(/\s*\(.*?\)\s*/g, '');
         temp7.push(temp8);
       }
       
