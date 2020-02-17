@@ -8,7 +8,7 @@ let path = require('path');
 
 function getData() {
     try {
-        const data = fs.readFileSync('status.real', 'utf8');
+        const data = fs.readFileSync('statusLess.real', 'utf8');
         return data;
         
       } catch (err) {
@@ -46,7 +46,16 @@ while (true){
     }
 }
 */
-let dataArray = data.split('\n\n');
+
+
+// Split data into packages according to operating system (windows or linux)
+let dataArray = [];
+if(process.platform === 'win32'){
+    dataArray = data.split('\r\n\r\n');
+} else {
+    dataArray = data.split('\n\n');
+}
+
 
 
 
@@ -160,6 +169,19 @@ for(let i=0;i<packageArray.length;i++){
     }
 }
 
+
+// Remove packages from the end that have no name or data.
+while (true){
+    if(packageArray[packageArray.length-1].getName()===''){
+        packageArray.pop();
+    } else {
+        break;
+    }
+}
+
+
+
+
 // Sort packages alphapetically
 packageArray.sort(function(a, b){
     return a.getName().localeCompare(b.getName());
@@ -180,12 +202,13 @@ for(let i=0;i<packageArray.length;i++){
     
     testLog.push(testPackage);
     
+    
 }
-
 
 console.log(testLog);
 
 
+/*
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -217,3 +240,5 @@ const server = http.createServer((req, res) => {
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+*/
