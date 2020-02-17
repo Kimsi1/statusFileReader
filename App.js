@@ -155,7 +155,7 @@ console.log(packageArray[2].getDepends());
 let testPackage = {
     name: packageArray[2].getName(),
     depends: packageArray[2].getDepends(),
-    //description: packageArray[2].getDescription(),
+    description: packageArray[2].getDescription(),
     revDepends: packageArray[2].getRevDepends()
 
 }
