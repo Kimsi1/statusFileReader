@@ -65,19 +65,17 @@ class Package {
         temp7.push(temp8);
       }
       
-      
+      // TODO: fix removing duplicates
       [...new Set(temp7)];
       temp7.filter((item, index) => temp7.indexOf(item) === index);
       temp7.reduce((unique, item) => 
         unique.includes(item) ? unique : [...unique, item], []);
 
-        
+
       /*  
       
-      
       https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
-      
-      
+            
       */
 
       return temp7
@@ -124,6 +122,19 @@ for(let i=0;i<dataArray.length;i++){
     packageArray.push(package);
 
 }
+
+for(let i=0;i<packageArray.length;i++){
+
+
+    let pack = packageArray[0];
+    for (let j=0;j<packageArray.length;j++){
+        if(packageArray[j].getDepends().includes(pack.getName)){
+            pack.setRevDepends(packageArray[j].getName());
+        }
+            
+    }
+}
+
 
 let testLog = [];
 
