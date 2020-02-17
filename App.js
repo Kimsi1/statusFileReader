@@ -58,7 +58,7 @@ class Package {
            
       var temp5 = temp3.join('\n ');
       var temp6 = temp5.split(', ');
-      var temp7 = [];
+      var temp7 = temp6.replace(/\s*\(.*?\)\s*/g, '');
       
       
       /*  
@@ -67,13 +67,15 @@ class Package {
           temp7.push(temp8[0]);
       }
       
+      https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
+      
       [...new Set(temp7)];
       temp7.filter((item, index) => temp7.indexOf(item) === index);
       temp7.reduce((unique, item) => 
         unique.includes(item) ? unique : [...unique, item], []);
       */
 
-      return temp6
+      return temp7
       }
 
     }
@@ -130,7 +132,7 @@ for(i=0;i<packageArray.length;i++){
 
     }
 
-    testLog.push(JSON.stringify(testPackage));
+    testLog.push(testPackage);
     
 }
 
