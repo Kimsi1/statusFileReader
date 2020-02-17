@@ -132,9 +132,9 @@ for(i=0;i<packageArray.length;i++){
     
     let testPackage = {
         name: packageArray[i].getName(),
-        dependencies: packageArray[i].getDepends(),
+        depends: packageArray[i].getDepends(),
         description: packageArray[i].getDescription(),
-        revDependencies: packageArray[i].getRevDepends()
+        revDepends: packageArray[i].getRevDepends()
 
     }
 
@@ -142,6 +142,6 @@ for(i=0;i<packageArray.length;i++){
     
 }
 
-console.log(testLog[2]);
+console.log(packageArray);
 
 console.log(packageArray[2].getDepends());
