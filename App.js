@@ -131,6 +131,7 @@ console.log(getDepends(dataArray[2]));
 
 
 */
-
-let testName = packageArray[1].getName();
-console.log(testName);
+for(i=0;i<packageArray.length;i++){
+    let testName = packageArray[i].getName();
+    console.log(testName);
+}
