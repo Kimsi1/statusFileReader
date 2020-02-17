@@ -60,7 +60,7 @@ class Package {
       var temp6 = temp5.split(', ');
       var temp7 = [];
       
-      for(i=0;i<temp6.length;i++){
+      for(let i=0;i<temp6.length;i++){
         let temp8=temp6[i].replace(/\s*\(.*?\)\s*/g, '');
         temp7.push(temp8);
       }
@@ -119,7 +119,7 @@ for(i=0;i<dataArray.length-1;i++){
 
 let packageArray = [];
 
-for(i=0;i<dataArray.length;i++){
+for(let i=0;i<dataArray.length;i++){
     let name = getPackageName(dataArray[i]);
     let package = new Package(name, dataArray[i]);
     packageArray.push(package);
@@ -128,7 +128,7 @@ for(i=0;i<dataArray.length;i++){
 
 let testLog = [];
 
-for(i=0;i<packageArray.length;i++){
+for(let i=0;i<packageArray.length;i++){
     
     let testPackage = {
         name: packageArray[i].getName(),
@@ -137,7 +137,7 @@ for(i=0;i<packageArray.length;i++){
         revDepends: packageArray[i].getRevDepends()
 
     }
-
+    
     testLog.push(testPackage);
     
 }
