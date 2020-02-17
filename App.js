@@ -58,7 +58,13 @@ class Package {
            
       var temp5 = temp3.join('\n ');
       var temp6 = temp5.split(', ');
-      var temp7 = temp6.replace(/\s*\(.*?\)\s*/g, '');
+      var temp7 = [];
+      
+      for(i=0;i<temp6.length;i++){
+        temp8=temp6.replace(/\s*\(.*?\)\s*/g, '');
+        temp7.push(temp8);
+      }
+      
       
       
       /*  
