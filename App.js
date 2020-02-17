@@ -145,3 +145,5 @@ for(i=0;i<packageArray.length;i++){
 console.log(packageArray);
 
 console.log(packageArray[2].getDepends());
+
+console.log(testPackage);
