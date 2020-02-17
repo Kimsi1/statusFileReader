@@ -128,18 +128,20 @@ for(let i=0;i<packageArray.length;i++){
 
     let pack = packageArray[i];
     for (let j=0;j<packageArray.length;j++){
-        if(packageArray[j].getDepends().includes(pack.getName)){
+        if(packageArray[j].getDepends().includes(pack.getName())){
             pack.setRevDepends(packageArray[j].getName());
         }
             
     }
 }
 
+
+/*
 if(packageArray[1].getDepends().includes(packageArray[3].getName())){
     packageArray[3].setRevDepends(packageArray[1].getName());
 }
 
-
+*/
 
 let testLog = [];
 
