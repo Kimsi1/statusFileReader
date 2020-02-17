@@ -64,12 +64,12 @@ class Package {
           var temp8=temp6[i].split(' (');
           temp7.push(temp8[0]);
       }
-
+      /*
       [...new Set(temp7)];
       temp7.filter((item, index) => temp7.indexOf(item) === index);
       temp7.reduce((unique, item) => 
         unique.includes(item) ? unique : [...unique, item], []);
-    
+      */
 
       return temp7
       }
