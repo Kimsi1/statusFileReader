@@ -1,8 +1,10 @@
 const fs = require('fs')
 
+
+
 function getData() {
     try {
-        const data = fs.readFileSync('statusLess.real', 'utf8');
+        const data = fs.readFileSync('status.real', 'utf8');
         return data;
         
       } catch (err) {
@@ -11,6 +13,7 @@ function getData() {
       
 }
 
+// A function that returns the name of a package.
 function getPackageName (props){
     var temp1 = props.split('\n',1);
     var temp2 = temp1[0].concat(": ");
@@ -27,9 +30,13 @@ function getPackageName (props){
 
 
 
+// Read the data and form it into an array.
 var data = getData().toString();
 var dataArray = data.split('\n\n');
 
+
+
+// Create a class of a package.
 class Package {
     constructor(name, packageText) {
         this.name = name;
@@ -114,8 +121,8 @@ for(i=0;i<dataArray.length-1;i++){
 */
 
 
+// Make an array of all package objects.
 let packageArray = [];
-
 for(let i=0;i<dataArray.length;i++){
     let name = getPackageName(dataArray[i]);
     let package = new Package(name, dataArray[i]);
@@ -123,9 +130,8 @@ for(let i=0;i<dataArray.length;i++){
 
 }
 
+// Get reverse dependencies for every package object.
 for(let i=0;i<packageArray.length;i++){
-
-
     let pack = packageArray[i];
     for (let j=0;j<packageArray.length;j++){
         if(packageArray[j].getDepends().includes(pack.getName())){
