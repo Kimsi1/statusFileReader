@@ -111,10 +111,14 @@ class Package {
     }
 
     setRevDepends (props){
+        if(this.revDepends==='No reverse dependencies'){
+            this.revDepends=[];
+        }
         this.revDepends.push(props);
     }
 
     getRevDepends(){
+        
         return this.revDepends;
     }
 
