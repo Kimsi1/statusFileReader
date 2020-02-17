@@ -128,11 +128,11 @@ for(i=0;i<packageArray.length;i++){
     
 
     console.log(testName);
-    console.log(testRevDep);
+    //console.log(testRevDep);
     
     
     //console.log(testDesc);
-    console.log(testDep);
+    //console.log(testDep);
     
     
 }
