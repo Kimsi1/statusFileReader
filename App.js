@@ -4,7 +4,7 @@ const fs = require('fs')
 
 function getData() {
     try {
-        const data = fs.readFileSync('statusLess.real', 'utf8');
+        const data = fs.readFileSync('status.real', 'utf8');
         return data;
         
       } catch (err) {
@@ -32,16 +32,16 @@ function getPackageName (props){
 
 // Read the data and form it into an array.
 let data = getData().toString();
-
+/*
 while (true){
-    if(data.includes('\n\n',data.length-4)){
+    if(data.match(/\n\n/g),data.length-4)){
         console.log(data.substring(data.length-4, data.length));
         data.slice(data.length-4, data.length);
     }else{
         break;
     }
 }
-
+*/
 let dataArray = data.split('\n\n');
 
 
