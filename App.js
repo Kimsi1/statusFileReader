@@ -66,22 +66,21 @@ class Package {
       }
       
       
-      
-      /*  
-      for (i = 0; i<temp6.length;i++){
-          var temp8=temp6[i].split(' (');
-          temp7.push(temp8[0]);
-      }
-      
-      https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
-      
       [...new Set(temp7)];
       temp7.filter((item, index) => temp7.indexOf(item) === index);
       temp7.reduce((unique, item) => 
         unique.includes(item) ? unique : [...unique, item], []);
+
+        
+      /*  
+      
+      
+      https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
+      
+      
       */
 
-      return temp6
+      return temp7
       }
 
     }
@@ -143,22 +142,4 @@ for(let i=0;i<packageArray.length;i++){
 }
 
 
-/*
-console.log(packageArray);
-
-console.log(packageArray[2].getDepends());
-
-
-
-*/
-
-let testPackage = {
-    name: packageArray[2].getName(),
-    depends: packageArray[2].getDepends(),
-    description: packageArray[2].getDescription(),
-    revDepends: packageArray[2].getRevDepends()
-
-}
-
-testLog.push(testPackage);
 console.log(testLog);
