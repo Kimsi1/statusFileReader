@@ -142,6 +142,6 @@ for(i=0;i<packageArray.length;i++){
     
 }
 
-console.log(testLog);
+console.log(testLog[2]);
 
 console.log(packageArray[2].getDepends());
