@@ -58,8 +58,6 @@ if(process.platform === 'win32'){
 
 
 
-
-// Create a class of a package.
 class Package {
     constructor(name, packageText) {
         this.name = name;
@@ -138,6 +136,7 @@ class Package {
 }
 
 
+
 /*
 var fixedDataArray = [];
 for(i=0;i<dataArray.length-1;i++){
@@ -205,40 +204,42 @@ for(let i=0;i<packageArray.length;i++){
     
 }
 
-console.log(testLog);
 
 
-/*
 
-const hostname = '127.0.0.1';
+
+
+
 const port = 3000;
+const express = require('express');
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  const parsedUrl = url.parse(req.url);
-  
-  // anti directory traversal attack
-  const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
-  
-  let pathname = path.join(__dirname, sanitizePath);
-  
-  // if is a directory, then look for index.html
-  if (fs.statSync(pathname).isDirectory()) {
-    pathname += '/index.html';
-  }
-  
-  fs.readFile(pathname, (err, data) => {
-	 if(err){
-      throw err;
-    } else {
-      res.end(data);
-      
-    }
-  })	  
+
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname+'/index.html'));
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
+
+
+app.get('/packages', (req, res) => {
+    res.json(testLog);
+    
 });
 
-*/
+
+app.get('/package/:name', (req, res) => {
+        const name = req.params.name;
+        for (let name of packages) {
+            if (package.name === name) {
+                res.json(name);
+                return;
+            }
+        }
+    
+        // Sending 404 when not found something is a good practice
+        res.status(404).send('Not found');
+
+});
+

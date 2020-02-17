@@ -1,0 +1,44 @@
+
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Packages</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  
+  <div id="packages"></div>
+
+  <script>
+    const loadPackages = () => {
+        const xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", "http://localhost:3000/packages", false);
+        xhttp.send();
+
+
+        // https://stackabuse.com/building-a-rest-api-with-node-and-express/
+
+
+        const packages = JSON.parse(xhttp.responseText);
+
+        for (let package of packages) {
+            const x = `
+                <p>${package.name}</p>
+            `
+            document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
+        }
+    }
+
+    loadPackages();
+  </script>
+</body>
+
+</html>
