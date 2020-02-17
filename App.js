@@ -119,9 +119,11 @@ for(i=0;i<dataArray.length;i++){
 
 for(i=0;i<packageArray.length;i++){
     let testName = packageArray[i].getName();
+    /*
     let testDesc = packageArray[i].getDescription();
     let testDep = packageArray[i].getDepends();
     let testRevDep = packageArray[i].getRevDepends();
+    */
 
     console.log(testName);
     /*
