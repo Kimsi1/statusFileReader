@@ -1,4 +1,8 @@
 const fs = require('fs')
+const http = require('http');
+let url = require('url');
+let path = require('path');
+
 
 
 
@@ -145,6 +149,7 @@ for(let i=0;i<dataArray.length;i++){
 }
 
 // Get reverse dependencies for every package object.
+//https://www.sitepoint.com/javascript-large-data-processing/
 for(let i=0;i<packageArray.length;i++){
     let pack = packageArray[i];
     for (let j=0;j<packageArray.length;j++){
@@ -155,13 +160,11 @@ for(let i=0;i<packageArray.length;i++){
     }
 }
 
+// Sort packages alphapetically
+packageArray.sort(function(a, b){
+    return a.getName().localeCompare(b.getName());
+})
 
-/*
-if(packageArray[1].getDepends().includes(packageArray[3].getName())){
-    packageArray[3].setRevDepends(packageArray[1].getName());
-}
-
-*/
 
 let testLog = [];
 
@@ -181,3 +184,36 @@ for(let i=0;i<packageArray.length;i++){
 
 
 console.log(testLog);
+
+
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  const parsedUrl = url.parse(req.url);
+  
+  // anti directory traversal attack
+  const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
+  
+  let pathname = path.join(__dirname, sanitizePath);
+  
+  // if is a directory, then look for index.html
+  if (fs.statSync(pathname).isDirectory()) {
+    pathname += '/index.html';
+  }
+  
+  fs.readFile(pathname, (err, data) => {
+	 if(err){
+      throw err;
+    } else {
+      res.end(data);
+      
+    }
+  })	  
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
