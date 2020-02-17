@@ -142,8 +142,22 @@ for(i=0;i<packageArray.length;i++){
     
 }
 
+
+/*
 console.log(packageArray);
 
 console.log(packageArray[2].getDepends());
 
 console.log(testLog);
+
+*/
+
+let testPackage = {
+    name: packageArray[2].getName(),
+    depends: packageArray[2].getDepends(),
+    description: packageArray[2].getDescription(),
+    revDepends: packageArray[2].getRevDepends()
+
+}
+
+testLog.push(testPackage);
