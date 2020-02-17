@@ -126,7 +126,7 @@ for(let i=0;i<dataArray.length;i++){
 for(let i=0;i<packageArray.length;i++){
 
 
-    let pack = packageArray[0];
+    let pack = packageArray[i];
     for (let j=0;j<packageArray.length;j++){
         if(packageArray[j].getDepends().includes(pack.getName)){
             pack.setRevDepends(packageArray[j].getName());
