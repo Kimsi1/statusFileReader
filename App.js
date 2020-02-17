@@ -143,3 +143,5 @@ for(i=0;i<packageArray.length;i++){
 }
 
 console.log(testLog);
+
+console.log(dataArray[2].getDepends());
