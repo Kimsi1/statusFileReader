@@ -123,7 +123,7 @@ for(i=0;i<packageArray.length;i++){
     let testPackage = {
         name: packageArray[i].getName(),
         dependencies: packageArray[i].getRevDepends(),
-        Description: packageArray[i].Description(),
+        Description: packageArray[i].getDescription(),
         revDependencie: packageArray[i].getRevDepends()
 
     }
