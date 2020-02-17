@@ -117,7 +117,8 @@ console.log(nameAndDependsArray);
 let packageArray = [];
 
 for(i=0;i<dataArray.length;i++){
-    let package = new Package(getPackageName(dataArray[i]), dataArray[i]);
+    let name = getPackageName(dataArray[i]);
+    let package = new Package(name, dataArray[i]);
     packageArray.push(package);
 
 }
