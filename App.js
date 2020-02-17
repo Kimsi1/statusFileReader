@@ -140,7 +140,7 @@ if(packageArray[1].getDepends().includes('python')){
 }
 
 
-/*
+
 let testLog = [];
 
 for(let i=0;i<packageArray.length;i++){
@@ -156,6 +156,6 @@ for(let i=0;i<packageArray.length;i++){
     testLog.push(testPackage);
     
 }
-*/
+
 
 console.log(testLog);
