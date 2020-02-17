@@ -62,7 +62,7 @@ class Package {
         
       for (i = 0; i<temp6.length;i++){
           var temp8=temp6[i].split(' (');
-          temp7[i]=temp8[0];
+          temp7.push(temp8[0]);
       }
 
       [...new Set(temp7)];
