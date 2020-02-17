@@ -125,8 +125,8 @@ for(i=0;i<packageArray.length;i++){
     console.log(packageArray.length);
     let testDesc = packageArray[i].getDescription();
     console.log(packageArray.length);
-    //let testDep = packageArray[i].getDepends();
-    
+    let testDep = packageArray[i].getDepends();
+    console.log(packageArray.length);
     
 
     console.log(testName);
@@ -134,7 +134,7 @@ for(i=0;i<packageArray.length;i++){
     
     
     console.log(testDesc);
-    //console.log(testDep);
+    console.log(testDep);
     
     
 }
