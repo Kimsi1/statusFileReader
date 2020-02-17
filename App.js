@@ -21,12 +21,6 @@ function getPackageName (props){
 
 
 
-
-
-
-
-
-
 // https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript/45035939
 
 // https://stackoverflow.com/questions/4950567/reading-client-side-text-file-using-javascript
@@ -70,6 +64,13 @@ class Package {
           var temp8=temp6[i].split(' (');
           temp7[i]=temp8[0];
       }
+
+      [...new Set(temp7)];
+      temp7.filter((item, index) => temp7.indexOf(item) === index);
+      temp7.reduce((unique, item) => 
+        unique.includes(item) ? unique : [...unique, item], []);
+    
+
       return temp7
       }
 
@@ -116,15 +117,13 @@ for(i=0;i<dataArray.length;i++){
 }
 
 
-
-
 for(i=0;i<packageArray.length;i++){
     
     let testPackage = {
         name: packageArray[i].getName(),
         dependencies: packageArray[i].getRevDepends(),
-        Description: packageArray[i].getDescription(),
-        revDependencie: packageArray[i].getRevDepends()
+        description: packageArray[i].getDescription(),
+        revDependencies: packageArray[i].getRevDepends()
 
     }
 
