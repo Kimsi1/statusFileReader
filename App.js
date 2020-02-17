@@ -124,7 +124,7 @@ for(i=0;i<packageArray.length;i++){
     
     let testPackage = {
         name: packageArray[i].getName(),
-        dependencies: packageArray[i].getRevDepends(),
+        dependencies: packageArray[i].getDepends(),
         description: packageArray[i].getDescription(),
         revDependencies: packageArray[i].getRevDepends()
 
