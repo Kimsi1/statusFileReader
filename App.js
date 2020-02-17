@@ -131,5 +131,5 @@ console.log(getDepends(dataArray[2]));
 
 */
 
-
-console.log(packageArray[1].getName);
+let testName = packageArray[1].getName;
+console.log(testName);
