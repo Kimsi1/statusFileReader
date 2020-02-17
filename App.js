@@ -108,7 +108,7 @@ for(i=0;i<dataArray.length-1;i++){
 
 let packageArray = [];
 
-for(i=0;i<dataArray.length-1;i++){
+for(i=0;i<dataArray.length;i++){
     let name = getPackageName(dataArray[i]);
     let package = new Package(name, dataArray[i]);
     packageArray.push(package);
@@ -117,7 +117,8 @@ for(i=0;i<dataArray.length-1;i++){
 
 
 
-for(i=0;i<packageArray.length-1;i++){
+
+for(i=0;i<packageArray.length;i++){
     let testName = packageArray[i].getName();
     let testRevDep = packageArray[i].getRevDepends();
     /*
