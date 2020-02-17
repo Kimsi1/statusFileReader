@@ -148,7 +148,7 @@ console.log(packageArray);
 
 console.log(packageArray[2].getDepends());
 
-console.log(testLog);
+
 
 */
 
@@ -161,3 +161,4 @@ let testPackage = {
 }
 
 testLog.push(testPackage);
+console.log(testLog);
