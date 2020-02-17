@@ -124,7 +124,9 @@ for(i=0;i<packageArray.length;i++){
     let testRevDep = packageArray[i].getRevDepends();
 
     console.log(testName);
+    /*
     console.log(testDesc);
     console.log(testDep);
     console.log(testRevDep);
+    */
 }
