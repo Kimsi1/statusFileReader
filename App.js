@@ -35,6 +35,7 @@ let data = getData().toString();
 
 while (true){
     if(data.includes('\n\n',data.length-4)){
+        console.log('true');
         data.slice(data.length-4, data.length);
     }else{
         break;
