@@ -123,7 +123,8 @@ for(i=0;i<packageArray.length;i++){
     console.log(packageArray.length);
     let testRevDep = packageArray[i].getRevDepends();
     console.log(packageArray.length);
-    //let testDesc = packageArray[i].getDescription();
+    let testDesc = packageArray[i].getDescription();
+    console.log(packageArray.length);
     //let testDep = packageArray[i].getDepends();
     
     
@@ -132,7 +133,7 @@ for(i=0;i<packageArray.length;i++){
     console.log(testRevDep);
     
     
-    //console.log(testDesc);
+    console.log(testDesc);
     //console.log(testDep);
     
     
