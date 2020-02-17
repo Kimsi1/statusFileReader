@@ -135,7 +135,12 @@ for(let i=0;i<packageArray.length;i++){
     }
 }
 
+if(packageArray[1].getDepends().includes('python')){
+    packageArray[3].setRevDepends(packageArray[1].getName());
+}
 
+
+/*
 let testLog = [];
 
 for(let i=0;i<packageArray.length;i++){
@@ -151,6 +156,6 @@ for(let i=0;i<packageArray.length;i++){
     testLog.push(testPackage);
     
 }
-
+*/
 
 console.log(testLog);
