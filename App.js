@@ -213,7 +213,7 @@ for(let i=0;i<packageArray.length;i++){
 const port = 3000;
 const express = require('express');
 const app = express();
-
+let name = '';
 
 
 app.get('/', (req, res) => {
@@ -227,10 +227,20 @@ app.get('/packages', (req, res) => {
     res.json(testLog);
     
 });
+app.get('/packagehtml', (req, res) => {
+    res.sendFile(path.join(__dirname+'/package.html'));
+});
+
+app.post('/packages/:name', (req, res) => {
+    name = req.params.name;
+    res.json();
+    console.log(name);
+    
+});
 
 
-app.get('/packages/:name', (req, res) => {
-        const name = req.params.name;
+app.get('/packages/name', (req, res) => {
+        
         for (let package of testLog) {
             if (package.name === name) {
                 res.json(package);

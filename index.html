@@ -30,8 +30,15 @@
         const packages = JSON.parse(xhttp.responseText);
 
         for (let package of packages) {
+          
+          function savePackageName(){
+            
+            alert('posted');
+           
+          }
+
             const x = `
-                <a href="http://localhost:3000/packages/${package.name}">${package.name}</p>
+                <a href="http://localhost:3000/packagehtml/" onclick='savePackageName();'>${package.name}</p>
             `
             document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
         }
