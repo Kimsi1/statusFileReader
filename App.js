@@ -19,7 +19,7 @@ function getData() {
 
 // A function that returns the name of a package.
 function getPackageName (props){
-    var temp1 = props.split('\n',1);
+    var temp1 = props.split('\r\n',1);
     var temp2 = temp1[0].concat(": ");
     var temp3 = temp2.split(": ",2);
     
@@ -220,7 +220,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/index.html'));
 });
 
-app.listen(port, () => console.log(`Hello world app listening on port ${port}!`))
+app.listen(port, () => console.log(`Packages app listening on port ${port}!`))
 
 
 app.get('/packages', (req, res) => {
@@ -229,16 +229,16 @@ app.get('/packages', (req, res) => {
 });
 
 
-app.get('/package/:name', (req, res) => {
+app.get('/packages/:name', (req, res) => {
         const name = req.params.name;
-        for (let name of packages) {
+        for (let package of testLog) {
             if (package.name === name) {
-                res.json(name);
+                res.json(package);
                 return;
             }
         }
     
-        // Sending 404 when not found something is a good practice
+        // Sending 404 when not found
         res.status(404).send('Not found');
 
 });

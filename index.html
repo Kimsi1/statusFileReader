@@ -31,7 +31,7 @@
 
         for (let package of packages) {
             const x = `
-                <p>${package.name}</p>
+                <a href="http://localhost:3000/packages/${package.name}">${package.name}</p>
             `
             document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
         }
