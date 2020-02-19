@@ -68,7 +68,16 @@
           });
         }
 
-
+        async function checkLink(name){
+                  
+          let url = "http://localhost:3000/checklink/"+name;
+          fetch(url, {method: "POST"})
+          .then(response => response.text())
+          .then((response) => {
+            
+            return response;
+          });
+        }
 
         const loadPackages = () => {
           fetch('http://localhost:3000/packages/name')
@@ -78,6 +87,7 @@
             .then((myJson) => {
               console.log(myJson);
               console.log(myJson.depends.length)
+              
               
               
 
@@ -90,12 +100,26 @@
               if(myJson.depends==='No dependencies.'){
                 depends.innerHTML = myJson.depends; 
               } else {
-                for (let package of myJson.depends) {
-                    const x = `
-                        <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
-                    `
-                    document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
-                }
+
+                                  
+
+                  for (let package of myJson.depends) {
+
+                    console.log(checkLink(package));
+                    
+                    if(checkLink(package).status===200){
+                      const x = `
+                          <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
+                      `
+                      document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                    } else {
+                      const x = `
+                          <p>${package}</p>
+                      `
+                      document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                    }  
+                      
+                  }
               }
 
 

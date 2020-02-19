@@ -206,6 +206,22 @@ app.get('/packages/name', (req, res) => {
         }
 });
 
+app.post('/checklink/:name', (req,res) => {
+    let checkName = req.params.name
+    let found = false;
+    console.log(checkName)
+    for (let package of orderedArray) {
+        if (package.name === checkName) {
+            found = true;
+        } 
+    }
+    if (found){
+        res.status(200);
+    } else {
+        res.status(404)
+    } 
+
+})
 
 // Start the backend
 app.listen(port, () => console.log(`Packages app listening on port ${port}!`))
