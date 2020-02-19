@@ -233,8 +233,9 @@ app.get('/packagehtml', (req, res) => {
 
 app.post('/packages/:name', (req, res) => {
     name = req.params.name;
-    res.json();
-    console.log(name);
+    
+    res.end(name);
+    console.log(name)
     
 });
 
@@ -244,7 +245,7 @@ app.get('/packages/name', (req, res) => {
         for (let package of testLog) {
             if (package.name === name) {
                 res.json(package);
-                return;
+            
             }
         }
     

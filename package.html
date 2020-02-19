@@ -7,16 +7,106 @@
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
     
-      
-    
       <meta name="theme-color" content="#fafafa">
+      <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
     </head>
     
     <body>
-      Hello
-      <div id="packages"></div>
-    
+      <table>
+        <tr>
+          <th>Label</th>
+          <th>Data</th>
+          
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td id="name"></td>
+          <
+        </tr>
+        <tr>
+          <td>Depends</td>
+          <td id="depends"></td>
+        
+        </tr>
+        <tr>
+          <td>Reverse depends</td>
+          <td id="revDepends"></td>
+          <
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td id="description"></td>
+          
+        </tr>
+        
+      </table>
       <script>
+        
+        let savePackageName=async(event, name)=>{
+          event.preventDefault();
+          let url = "http://localhost:3000/packages/"+name;
+          fetch(url, {method: "POST"}).then(() => {
+            location.href = event.target.href;
+          });
+        }
+
+
+
+        const loadPackages = () => {
+          fetch('http://localhost:3000/packages/name')
+            .then((response) => {
+              return response.json();
+            })
+            .then((myJson) => {
+              console.log(myJson);
+              console.log(myJson.depends.length)
+              
+              
+
+              let name = document.getElementById("name");
+              name.innerHTML = myJson.name;
+              let depends = document.getElementById("depends");
+              depends.innerHTML = myJson.depends; 
+              let description = document.getElementById("description");
+              description.innerHTML = myJson.description;  
+
+              let revDepends = document.getElementById("revDepends");
+              if(myJson.revDepends==='No reverse dependencies'){
+                revDepends.innerHTML = myJson.revDepends;
+              } else {
+                for (let package of myJson.revDepends) {
+                    const x = `
+                        <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
+                    `
+                    document.getElementById('revDepends').innerHTML = document.getElementById('revDepends').innerHTML + x;
+                }
+              }
+
+
+              
+          });
+
+          
+        }
+        
+
+        loadPackages();
         
       </script>
     </body>

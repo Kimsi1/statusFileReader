@@ -17,6 +17,19 @@
   <div id="packages"></div>
 
   <script>
+    
+    let savePackageName=async(event, name)=>{
+      event.preventDefault();
+      let url = "http://localhost:3000/packages/"+name;
+      fetch(url, {method: "POST"}).then(() => {
+        location.href = event.target.href;
+    });
+
+  }
+
+
+    
+    
     const loadPackages = () => {
         const xhttp = new XMLHttpRequest();
 
@@ -31,14 +44,11 @@
 
         for (let package of packages) {
           
-          function savePackageName(){
             
-            alert('posted');
-           
-          }
+            
 
             const x = `
-                <a href="http://localhost:3000/packagehtml/" onclick='savePackageName();'>${package.name}</p>
+                <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package.name}')">${package.name}</a></p>
             `
             document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
         }
