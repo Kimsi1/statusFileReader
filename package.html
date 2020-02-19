@@ -39,7 +39,7 @@
         <tr>
           <td>Name:</td>
           <td id="name"></td>
-          <
+          
         </tr>
         <tr>
           <td>Depends:</td>
@@ -49,7 +49,7 @@
         <tr>
           <td>Reverse depends:</td>
           <td id="revDepends"></td>
-          <
+          
         </tr>
         <tr>
           <td>Description:</td>
@@ -92,7 +92,7 @@
               } else {
                 for (let package of myJson.depends) {
                     const x = `
-                        <p>${package}</p>
+                        <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
                     `
                     document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                 }

@@ -69,6 +69,8 @@ class Package {
       for(let i=0;i<temp6.length;i++){
         let temp8=temp6[i].replace(/\s*\(.*?\)\s*/g, '');
         temp7.push(temp8);
+
+        // TODO: fix rendering of pipe character alternatives, as instructed
       }
       
       // TODO: fix removing duplicates
@@ -184,6 +186,7 @@ let name = '';
 app.post('/packages/:name', (req, res) => {
     name = req.params.name;
     res.end(name);
+    console.log(name)
 });
 
 // This returns the package which's name equals the name the user last clicked in the frontend
@@ -195,9 +198,11 @@ app.get('/packages/name', (req, res) => {
                 res.json(package);
             }
         }
-        // Sending 404 when not found
+        // When not found, send data to reflect that
+        // TODO: make more clear nothing is found. Like module-init-tools and upstart-job
         if(!found){
-            res.status(404).send('Not found');
+            let notFound = new Package('NOT FOUND','Depends: NOT FOUND\n Description: NOT FOUND\n')
+            res.json(notFound);
         }
 });
 
