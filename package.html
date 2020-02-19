@@ -10,7 +10,9 @@
       <meta name="theme-color" content="#fafafa">
       <style>
         table {
-          font-family: arial, sans-serif;
+          
+          font-family: helvetica;
+          text-decoration: none;
           border-collapse: collapse;
           width: 100%;
         }
@@ -35,22 +37,22 @@
           
         </tr>
         <tr>
-          <td>Name</td>
+          <td>Name:</td>
           <td id="name"></td>
           <
         </tr>
         <tr>
-          <td>Depends</td>
+          <td>Depends:</td>
           <td id="depends"></td>
         
         </tr>
         <tr>
-          <td>Reverse depends</td>
+          <td>Reverse depends:</td>
           <td id="revDepends"></td>
           <
         </tr>
         <tr>
-          <td>Description</td>
+          <td>Description:</td>
           <td id="description"></td>
           
         </tr>
@@ -81,10 +83,21 @@
 
               let name = document.getElementById("name");
               name.innerHTML = myJson.name;
-              let depends = document.getElementById("depends");
-              depends.innerHTML = myJson.depends; 
               let description = document.getElementById("description");
               description.innerHTML = myJson.description;  
+              
+              let depends = document.getElementById("depends");
+              if(myJson.depends==='No dependencies.'){
+                depends.innerHTML = myJson.depends; 
+              } else {
+                for (let package of myJson.depends) {
+                    const x = `
+                        <p>${package}</p>
+                    `
+                    document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                }
+              }
+
 
               let revDepends = document.getElementById("revDepends");
               if(myJson.revDepends==='No reverse dependencies'){
