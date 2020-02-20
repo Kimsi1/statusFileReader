@@ -72,11 +72,13 @@
                   
           let url = "http://localhost:3000/checklink/"+name;
           fetch(url, {method: "POST"})
-          .then(response => response.text())
           .then((response) => {
-            
-            return response;
+              if(response.headers.get('status')==200){
+                console.log('works')
+              }
           });
+
+
         }
 
         const loadPackages = () => {
