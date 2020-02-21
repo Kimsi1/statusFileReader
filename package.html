@@ -68,19 +68,21 @@
           });
         }
 
+        
         async function checkLink(name){
                   
           let url = "http://localhost:3000/checklink/"+name;
-          fetch(url, {method: "POST"})
+          await fetch(url, {method: "POST"})
           .then((response) => {
-              if(response.headers.get('status')==200){
-                console.log('works')
-              }
+              
+                console.log(response.status)
+                return response.status;
+              
           });
 
 
         }
-
+        
         const loadPackages = () => {
           fetch('http://localhost:3000/packages/name')
             .then((response) => {
@@ -107,9 +109,9 @@
 
                   for (let package of myJson.depends) {
 
-                    console.log(checkLink(package));
+
                     
-                    if(checkLink(package).status===200){
+                    if(checkLink(package)==200){
                       const x = `
                           <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
                       `
