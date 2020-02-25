@@ -91,7 +91,7 @@
             })
             .then((myJson) => {
               
-
+              
               let name = document.getElementById("name");
               name.innerHTML = myJson.name;
               let description = document.getElementById("description");
@@ -106,24 +106,63 @@
                 depends.innerHTML = myJson.depends; 
               } else {
 
-                                  
+                console.log(myJson.depends)
 
                   for (let package of myJson.depends) {
-
                     
-                    
-                    if(allNames.includes(package.toString())){
-                      const x = `
-                          <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
-                      `
-                      document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
-                    } else {
-                      const x = `
-                          <p>${package}</p>
-                      `
-                      document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
-                    }  
+                    if(package.toString().includes(' | ')){
+                      let splitList = package.toString().split(' | ');
                       
+                      for(let i=0;i<splitList.length;i++){
+                        
+                        let key = splitList[i].split('\r')
+                        
+                        
+                        if(allNames.includes(key[0])){
+                          if(i<splitList.length-1){
+                            const x = `
+                              <a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
+                            `
+                            document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                          } else {
+                            const x = `
+                              <a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a>
+                            `
+                            document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                          }
+
+                          
+                        } else {
+                          if(i<splitList.length-1){
+
+                            
+                            const x = `
+                                ${splitList[i]} |
+                            `
+                            document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                          } else {
+                            const x = `
+                                ${splitList[i]}
+                            `
+                            document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                          }
+                        }  
+                      }
+
+                    } else {
+  
+                      if(allNames.includes(package.toString())){
+                        const x = `
+                            <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
+                        `
+                        document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                      } else {
+                        const x = `
+                            <p>${package}</p>
+                        `
+                        document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
+                      }  
+                    } 
                   }
               }
 

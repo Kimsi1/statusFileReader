@@ -58,33 +58,23 @@ class Package {
       } else {
       
       var temp2 = temp1[1].split(': ');
-      var temp3 = temp2[0].split("\n ");
-      var temp4 = temp3[temp3.length-1].split('\n');
-      temp3[temp3.length-1] = temp4[0];
+      var temp3 = temp2[0].split('Conffiles:');
+      var temp4 = temp3[0].split("\n ");
+      var temp5 = temp4[temp4.length-1].split('\n');
+      temp4[temp4.length-1] = temp5[0];
            
-      var temp5 = temp3.join('\n ');
-      var temp6 = temp5.split(', ');
-      var temp7 = [];
+      var temp6 = temp4.join('\n ');
+      var temp7 = temp6.split(', ');
+      var temp8 = [];
       
-      for(let i=0;i<temp6.length;i++){
-        let temp8=temp6[i].replace(/\s*\(.*?\)\s*/g, '');
-        temp7.push(temp8);
+      for(let i=0;i<temp7.length;i++){
+        let temp9=temp7[i].replace(/\s*\(.*?\)\s*/g, '');
+        temp8.push(temp9);
 
-        // TODO: fix rendering of pipe character alternatives, as instructed
+        
       }
-      
-      // TODO: fix removing duplicates
-      [...new Set(temp7)];
-      temp7.filter((item, index) => temp7.indexOf(item) === index);
-      temp7.reduce((unique, item) => 
-        unique.includes(item) ? unique : [...unique, item], []);
-      /*  
-      
-      https://medium.com/dailyjs/how-to-remove-array-duplicates-in-es6-5daa8789641c
-            
-      */
-
-      return temp7
+      // Remove duplicates.
+      return Array.from(new Set(temp8));
       }
     }
     
@@ -122,7 +112,6 @@ for(let i=0;i<dataArray.length;i++){
 }
 
 // Get reverse dependencies for every package object.
-//https://www.sitepoint.com/javascript-large-data-processing/
 for(let i=0;i<packageArray.length;i++){
     let pack = packageArray[i];
     for (let j=0;j<packageArray.length;j++){
@@ -168,6 +157,9 @@ for(let i=0;i<packageArray.length;i++){
 const port = 3000;
 const express = require('express');
 const app = express();
+const fileUpload = require('express-fileupload');
+
+app.use(fileUpload());
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/index.html'));
@@ -178,7 +170,7 @@ app.get('/packages', (req, res) => {
 });
 
 app.get('/packagehtml', (req, res) => {
-    res.sendFile(path.join(__dirname+'/package.html'));
+    res.sendFile(path.join(__dirname+'/client/package.html'));
 });
 
 // Use the backend API to store the package name that the user clicked last in the frontend
@@ -203,6 +195,24 @@ app.get('/packages/name', (req, res) => {
             let notFound = new Package('NOT FOUND','Depends: NOT FOUND\n Description: NOT FOUND\n')
             res.json(notFound);
         }
+});
+
+app.post('/upload/file', (req, res) => {
+    if (!req.files){
+        return res.status(400).send('No files were uploaded.');
+    }
+    let filu = req.files.file;
+
+    /*
+    filu.mv('/fileLess.real', function(err) {
+    if (err){
+        return res.status(500).send(err);
+    }
+    */
+
+    res.status(200).send('File uploaded!');
+
+    //})
 });
 
 

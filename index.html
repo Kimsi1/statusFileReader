@@ -1,4 +1,8 @@
 
+
+// https://stackoverflow.com/questions/5587973/javascript-upload-file
+
+
 <html class="no-js" lang="">
 
 <head>
@@ -33,48 +37,29 @@
 
 <body>
   
-  <div id="packages"></div>
+  <div id="buttons">
+    <input id="file" name="file" type="file" onchange="uploadFile(this)">
+    
+
+
+  </div>
 
   <script>
     
-    let savePackageName=async(event, name)=>{
-      event.preventDefault();
-      let url = "http://localhost:3000/packages/"+name;
-      fetch(url, {method: "POST"}).then(() => {
-        location.href = event.target.href;
-    });
 
-  }
+    async function uploadFile(inp){
+        let filu = inp.files[0];
+        let formData = new FormData();
 
+        formData.append("file", filu);
+        let r = await fetch('/upload/file', {method: "POST", body: formData});
+        console.log('HTTP response code:',r.status); 
 
-    
-    // TODO: XMLHTTPrequest gives an error in the console.
-    const loadPackages = () => {
-        const xhttp = new XMLHttpRequest();
-
-        xhttp.open("GET", "http://localhost:3000/packages", false);
-        xhttp.send();
-
-
-        // https://stackabuse.com/building-a-rest-api-with-node-and-express/
-
-
-        const packages = JSON.parse(xhttp.responseText);
-
-        for (let package of packages) {
-          
-            
-            
-
-            const x = `
-                <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package.name}')">${package.name}</a></p>
-            `
-            document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
-        }
     }
+      
 
-    loadPackages();
+
+
   </script>
 </body>
-
 </html>
