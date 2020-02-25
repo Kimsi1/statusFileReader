@@ -186,10 +186,10 @@ let name = '';
 app.post('/packages/:name', (req, res) => {
     name = req.params.name;
     res.end(name);
-    console.log(name)
+    
 });
 
-// This returns the package which's name equals the name the user last clicked in the frontend
+// This returns the package which's name is equal to the name that was last clicked in the frontend
 app.get('/packages/name', (req, res) => {
         let found = false;
         for (let package of orderedArray) {
@@ -199,30 +199,13 @@ app.get('/packages/name', (req, res) => {
             }
         }
         // When not found, send data to reflect that
-        // TODO: make more clear nothing is found. Like module-init-tools and upstart-job
         if(!found){
             let notFound = new Package('NOT FOUND','Depends: NOT FOUND\n Description: NOT FOUND\n')
             res.json(notFound);
         }
 });
 
-app.post('/checklink/:name', (req,res) => {
-    let checkName = req.params.name
-    let found = false;
-    console.log(checkName)
-    for (let package of orderedArray) {
-        if (package.name === checkName) {
-            found = true;
-        } 
-    }
-    if (found){
-        res.status(200);
-    } else {
-        res.status(404)
-    } 
-
-})
 
 // Start the backend
-app.listen(port, () => console.log(`Packages app listening on port ${port}!`))
+app.listen(port, () => console.log(`App listening on port ${port}!`))
 
