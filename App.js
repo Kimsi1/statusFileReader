@@ -160,7 +160,6 @@ function processData(){
         }
         orderedArray.push(orderedPackage);
     }
-    console.log('Processed!')
 }
 
 

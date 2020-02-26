@@ -23,13 +23,13 @@ let savePackageName=async(event, name)=>{
       const packages = JSON.parse(xhttp.responseText);
       
       if(packages.name==='NOT FOUND'){
-        const x = 'Could not find any Packages. Please check uploaded file, or use example data.'
+        const x = '<h3>Could not find any Packages. Please check your uploaded file, or use the example data.</h3>'
         document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
       } else {
 
         for (let package of packages) {
             const x = `
-                <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package.name}')">${package.name}</a></p>
+            <a class="package-item" href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package.name}')">${package.name}</a>
             `
             document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
         }

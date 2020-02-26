@@ -53,6 +53,7 @@ let savePackageName=async(event, name)=>{
                     // If the package name list includes the dependency name, create a link to the it.
                     if(allNames.includes(key[0])){
                       // If there are more items, put a '|' character to the end
+                      // TODO: '| ' does not work
                       if(i<splitList.length-1){
                         const x = `
                           <a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
