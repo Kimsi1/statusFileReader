@@ -160,6 +160,7 @@ function processData(){
         }
         orderedArray.push(orderedPackage);
     }
+    console.log('Processed!')
 }
 
 
@@ -170,7 +171,7 @@ const express = require('express');
 const app = express();
 const fileUpload = require('express-fileupload');
 
-app.use(fileUpload());
+app.use(fileUpload(), express.static(__dirname + '/client'));
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/index.html'));
@@ -219,23 +220,28 @@ app.get('/packages/name', (req, res) => {
         }
 });
 
+// Receive a file from client and save it to the server.
 app.post('/upload/file', (req, res) => {
     if (!req.files){
         return res.status(400).send('No files were uploaded.');
     }
     let filu = req.files.file;
-
-    
     filu.mv(__dirname+'/fileLess.real', function(err) {
         if (err){
             return res.status(500).send(err);
         }
-        
+        // Use the data in the new file to create package data.
         fileName='fileLess.real';
         processData();
         return res.status(200).send('File uploaded!');
-
     })
+});
+
+app.get('/example', (req, res) => {
+    fileName='status.real';
+    processData();
+    return res.status(200).send('Using example data');
+    
 });
 
 

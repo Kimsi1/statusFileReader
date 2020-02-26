@@ -1,0 +1,20 @@
+body {background-color:#F3E7E7;}
+
+a {
+    color: blue;
+    font-family: helvetica;
+    text-decoration: none;
+    
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: black;
+  }
+  
+  a:visited {
+    color: blue;
+  }
