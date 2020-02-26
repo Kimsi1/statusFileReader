@@ -1,19 +1,22 @@
 const fs = require('fs')
 let path = require('path');
 
+let fileName = 'status.real'
+let orderedArray = [];
 
+
+// Reads data from a file
 function getData() {
     try {
-        const data = fs.readFileSync('status.real', 'utf8');
+        const data = fs.readFileSync(fileName, 'utf8');
         return data;
         
       } catch (err) {
         console.error(err)
-      }
-      
+      }  
 }
 
-// A function that returns the name of a package.
+// Returns the name of a package from a block of text.
 function getPackageName (props){
     var temp1 = props.split('\r\n',1);
     var temp2 = temp1[0].concat(": ");
@@ -22,20 +25,6 @@ function getPackageName (props){
     return temp3[1];
 }
 
-// https://stackoverflow.com/questions/19706046/how-to-read-an-external-local-json-file-in-javascript/45035939
-
-// https://stackoverflow.com/questions/4950567/reading-client-side-text-file-using-javascript
-
-
-// Read the data and form it into an array.
-let data = getData().toString();
-let dataArray = [];
-    // Split data into packages according to operating system (windows or linux)
-if(process.platform === 'win32'){
-    dataArray = data.split('\r\n\r\n');
-} else {
-    dataArray = data.split('\n\n');
-}
 
 
 // Define a package object as a class
@@ -101,54 +90,76 @@ class Package {
     }
 }
 
+// This function gets called when new filedata needs to be processed
+function processData(){
+    
+    // Clear previous data.
+    orderedArray = [];
 
-// Make an array of all package objects.
-let packageArray = [];
-for(let i=0;i<dataArray.length;i++){
-    let name = getPackageName(dataArray[i]);
-    let package = new Package(name, dataArray[i]);
-    packageArray.push(package);
 
-}
-
-// Get reverse dependencies for every package object.
-for(let i=0;i<packageArray.length;i++){
-    let pack = packageArray[i];
-    for (let j=0;j<packageArray.length;j++){
-        if(packageArray[j].getDepends().includes(pack.getName())){
-            pack.setRevDepends(packageArray[j].getName());
+    // Read the data and form it into an array.
+    let data = getData().toString();
+    let dataArray = [];
+    // Check if the data contains at least 1 package text.
+    if(data.includes('Package: ')){
+        // Split data into packages according to operating system (windows or linux)
+        if(process.platform === 'win32'){
+            dataArray = data.split('\r\n\r\n');
+        } else {
+            dataArray = data.split('\n\n');
         }
-            
-    }
-}
-
-
-// Remove packages from the end of the package array, that have no name.
-while (true){
-    if(packageArray[packageArray.length-1].getName()===''){
-        packageArray.pop();
     } else {
-        break;
+        // If there was no package text, exit the function.
+        return;
     }
-}
 
+    // Make an array and store all package objects there.
+    let packageArray = [];
+    for(let i=0;i<dataArray.length;i++){
+        let name = getPackageName(dataArray[i]);
+        let package = new Package(name, dataArray[i]);
+        packageArray.push(package);
 
-// Sort packages in the package array alphapetically
-packageArray.sort(function(a, b){
-    return a.getName().localeCompare(b.getName());
-})
-
-
-// Create a formally ordered array out of the package array
-let orderedArray = [];
-for(let i=0;i<packageArray.length;i++){
-    let orderedPackage = {
-        name: packageArray[i].getName(),
-        depends: packageArray[i].getDepends(),
-        description: packageArray[i].getDescription(),
-        revDepends: packageArray[i].getRevDepends()
     }
-    orderedArray.push(orderedPackage);
+
+    // Get reverse dependencies for every package object.
+    for(let i=0;i<packageArray.length;i++){
+        let pack = packageArray[i];
+        for (let j=0;j<packageArray.length;j++){
+            if(packageArray[j].getDepends().includes(pack.getName())){
+                pack.setRevDepends(packageArray[j].getName());
+            }
+                
+        }
+    }
+
+
+    // Remove packages from the end of the package array, that have no name.
+    while (true){
+        if(packageArray[packageArray.length-1].getName()===''){
+            packageArray.pop();
+        } else {
+            break;
+        }
+    }
+
+
+    // Sort packages in the package array alphapetically
+    packageArray.sort(function(a, b){
+        return a.getName().localeCompare(b.getName());
+    })
+
+
+    // Create a formally ordered array out of the package array
+    for(let i=0;i<packageArray.length;i++){
+        let orderedPackage = {
+            name: packageArray[i].getName(),
+            depends: packageArray[i].getDepends(),
+            description: packageArray[i].getDescription(),
+            revDepends: packageArray[i].getRevDepends()
+        }
+        orderedArray.push(orderedPackage);
+    }
 }
 
 
@@ -162,16 +173,27 @@ const fileUpload = require('express-fileupload');
 app.use(fileUpload());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'/index.html'));
+    res.sendFile(path.join(__dirname+'/client/index.html'));
 });
 
-app.get('/packages', (req, res) => {
-    res.json(orderedArray);
+app.get('/list', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/list.html'));
 });
 
 app.get('/packagehtml', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/package.html'));
 });
+
+
+app.get('/packages', (req, res) => {
+    if(orderedArray.length>0){
+        res.status(200).json(orderedArray);
+    } else {
+        res.status(200).json({name:'NOT FOUND'})
+    }
+    
+});
+
 
 // Use the backend API to store the package name that the user clicked last in the frontend
 let name = '';
@@ -181,7 +203,7 @@ app.post('/packages/:name', (req, res) => {
     
 });
 
-// This returns the package which's name is equal to the name that was last clicked in the frontend
+// This API returns the package which's name is equal to the name that was last clicked in the frontend
 app.get('/packages/name', (req, res) => {
         let found = false;
         for (let package of orderedArray) {
@@ -203,19 +225,21 @@ app.post('/upload/file', (req, res) => {
     }
     let filu = req.files.file;
 
-    /*
-    filu.mv('/fileLess.real', function(err) {
-    if (err){
-        return res.status(500).send(err);
-    }
-    */
+    
+    filu.mv(__dirname+'/fileLess.real', function(err) {
+        if (err){
+            return res.status(500).send(err);
+        }
+        
+        fileName='fileLess.real';
+        processData();
+        return res.status(200).send('File uploaded!');
 
-    res.status(200).send('File uploaded!');
-
-    //})
+    })
 });
 
 
 // Start the backend
+processData();
 app.listen(port, () => console.log(`App listening on port ${port}!`))
 
