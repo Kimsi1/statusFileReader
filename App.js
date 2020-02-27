@@ -116,15 +116,15 @@ function processData(){
     // Make an array and store all package objects there.
     let packageArray = [];
     for(let i=0;i<dataArray.length;i++){
-        console.log(dataArray.length);
+        
 
         let name = getPackageName(dataArray[i]);
-        console.log(name);
+        
         let package = new Package(name, dataArray[i]);
         packageArray.push(package);
 
     }
-    console.log('THIS IS packagearray:'+packageArray);
+    
     // Get reverse dependencies for every package object.
     for(let i=0;i<packageArray.length;i++){
         let pack = packageArray[i];
@@ -251,7 +251,5 @@ app.get('/example', (req, res) => {
 
 
 // Start the backend
-// processData();
-//app.listen(port, () => console.log(`App listening on port ${port}!`))
 app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
 
