@@ -19,7 +19,7 @@ function getData() {
 
 // Returns the name of a package from a block of text.
 function getPackageName (props){
-    var temp1 = props.split('\r\n',1);
+    var temp1 = props.split('\n',1);
     var temp2 = temp1[0].concat(": ");
     var temp3 = temp2.split(": ",2);
     
