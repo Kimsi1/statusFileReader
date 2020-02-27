@@ -40,7 +40,7 @@ let savePackageName=async(event, name)=>{
             if(myJson.depends==='No dependencies.'){
               depends.innerHTML = myJson.depends; 
             } else {
-
+              
               for (let package of myJson.depends) {
                 
                 // If there is a pipe character, deal with the linking.
@@ -54,6 +54,7 @@ let savePackageName=async(event, name)=>{
                     if(allNames.includes(key[0])){
                       // If there are more items, put a '|' character to the end
                       // TODO: '| ' does not work
+                    
                       if(i<splitList.length-1){
                         const x = `
                           <a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
@@ -83,16 +84,18 @@ let savePackageName=async(event, name)=>{
 
                 } else {
                   // No pipe character was found in dependency entry.
+                  // There might be a '\r' when run in windows OS, so it is removed.
+                  let key = package.toString().split('\r')
                   // If the package name list includes the dependency name, create a link to the it.
-                  if(allNames.includes(package.toString())){
+                  if(allNames.includes(key[0])){
                     const x = `
-                        <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
+                        <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a></p>
                     `
                     document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                   } else {
                     // Name was not found in the package name list, so no link will be created.
                     const x = `
-                        <p>${package}</p>
+                        <p>${key[0]}</p>
                     `
                     document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                   }  

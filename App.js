@@ -57,6 +57,7 @@ class Package {
       var temp8 = [];
       
       for(let i=0;i<temp7.length;i++){
+        // remove anything between brackets, and spaces from the front and back of the brackets
         let temp9=temp7[i].replace(/\s*\(.*?\)\s*/g, '');
         temp8.push(temp9);
 
