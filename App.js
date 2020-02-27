@@ -105,13 +105,7 @@ function processData(){
     let dataArray = [];
     // Check if the data contains at least 1 package text.
     if(data.includes('Package: ')){
-        // Split data into packages according to operating system (windows or linux)
-        if(process.platform === 'win32'){
-            dataArray = data.split('\r\n\r\n');
-        } else {
-            dataArray = data.split('\r\n\r\n');
-            console.log('THIS IS NON-WIN DATA ARRAY:'+dataArray);
-        }
+        dataArray = data.split('\r\n\r\n');
     } else {
         // If there was no package text, exit the function.
         return;
@@ -166,7 +160,7 @@ function processData(){
             revDepends: packageArray[i].getRevDepends()
         }
         orderedArray.push(orderedPackage);
-        console.log(orderedArray);
+        
     }
 }
 
