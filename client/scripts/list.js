@@ -1,6 +1,6 @@
 let savePackageName=async(event, name)=>{
     event.preventDefault();
-    let url = "http://localhost/packages/"+name;
+    let url = "/packages/"+name;
     fetch(url, {method: "POST"}).then(() => {
       location.href = event.target.href;
     });
@@ -13,7 +13,7 @@ let savePackageName=async(event, name)=>{
   const loadPackages = () => {
       const xhttp = new XMLHttpRequest();
 
-      xhttp.open("GET", "http://localhost/packages", false);
+      xhttp.open("GET", "/packages", false);
       xhttp.send();
 
 
@@ -29,7 +29,7 @@ let savePackageName=async(event, name)=>{
 
         for (let package of packages) {
             const x = `
-            <a class="package-item" href="http://localhost/packagehtml" onclick="javascript:savePackageName(event, '${package.name}')">${package.name}</a>
+            <a class="package-item" href="/packagehtml" onclick="javascript:savePackageName(event, '${package.name}')">${package.name}</a>
             `
             document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
         }

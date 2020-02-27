@@ -1,7 +1,7 @@
 // Sends the name of the package as a POST request to the backend.
 let savePackageName=async(event, name)=>{
     event.preventDefault();
-    let url = "http://localhost/packages/"+name;
+    let url = "/packages/"+name;
     fetch(url, {method: "POST"}).then(() => {
       location.href = event.target.href;
     });
@@ -13,7 +13,7 @@ let savePackageName=async(event, name)=>{
   // This is called when the page is loaded.
   const loadPackages = () => {
     // Get all of the packages from backend and save their names on an array.
-    fetch('http://localhost/packages/')
+    fetch('/packages/')
       .then((response) => {
         return response.json();
       })
@@ -23,7 +23,7 @@ let savePackageName=async(event, name)=>{
         }
         
         // Get the package that the user clicked
-        fetch('http://localhost/packages/name')
+        fetch('/packages/name')
           .then((response) => {
             return response.json();
           })
@@ -57,12 +57,12 @@ let savePackageName=async(event, name)=>{
                       // If there are more items left, put a '|' character to the end
                       if(i<splitList.length-1){
                         const x = `
-                          <a href="http://localhost/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
+                          <a href="/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
                         `
                         document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                       } else {
                         const x = `
-                          <a href="http://localhost/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a>
+                          <a href="/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a>
                         `
                         document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                       }
@@ -90,7 +90,7 @@ let savePackageName=async(event, name)=>{
                   // If the package name list includes the dependency name, create a link to it.
                   if(allNames.includes(key[0])){
                     const x = `
-                        <p><a href="http://localhost/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a></p>
+                        <p><a href="/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a></p>
                     `
                     document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                   } else {
@@ -111,7 +111,7 @@ let savePackageName=async(event, name)=>{
         } else {
           for (let package of myJson.revDepends) {
               const x = `
-                  <p><a href="http://localhost/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
+                  <p><a href="/packagehtml" onclick="javascript:savePackageName(event, '${package}')">${package}</a></p>
               `
               document.getElementById('revDepends').innerHTML = document.getElementById('revDepends').innerHTML + x;
           }
