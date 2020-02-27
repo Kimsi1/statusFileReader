@@ -9,6 +9,7 @@ let orderedArray = [];
 function getData() {
     try {
         const data = fs.readFileSync(fileName, 'utf8');
+        console.log(data);
         return data;
         
       } catch (err) {
@@ -161,6 +162,7 @@ function processData(){
             revDepends: packageArray[i].getRevDepends()
         }
         orderedArray.push(orderedPackage);
+        console.log(orderedArray);
     }
 }
 
@@ -174,6 +176,7 @@ const fileUpload = require('express-fileupload');
 
 app.use(fileUpload(), express.static(__dirname + '/client'));
 
+// HTML pages
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname+'/client/index.html'));
 });
@@ -187,6 +190,7 @@ app.get('/packagehtml', (req, res) => {
 });
 
 
+// All packages
 app.get('/packages', (req, res) => {
     if(orderedArray.length>0){
         res.status(200).json(orderedArray);
