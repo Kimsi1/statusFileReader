@@ -19,7 +19,7 @@ function getData() {
 
 // Returns the name of a package from a block of text.
 function getPackageName (props){
-    var temp1 = props.split('\r\n',1);
+    var temp1 = props.split('\n',1);
     var temp2 = temp1[0].concat(": ");
     var temp3 = temp2.split(": ",2);
     
@@ -105,7 +105,7 @@ function processData(){
     let dataArray = [];
     // Check if the data contains at least 1 package text.
     if(data.includes('Package: ')){
-        dataArray = data.split('\r\n\r\n');
+        dataArray = data.split('\n\n');
     } else {
         // If there was no package text, exit the function.
         return;
