@@ -6,8 +6,6 @@ let savePackageName=async(event, name)=>{
     });
 
   }
-
-
   
   // TODO: XMLHTTPrequest gives an error in the console.
   const loadPackages = () => {
@@ -15,10 +13,6 @@ let savePackageName=async(event, name)=>{
 
       xhttp.open("GET", "/packages", false);
       xhttp.send();
-
-
-      // https://stackabuse.com/building-a-rest-api-with-node-and-express/
-
 
       const packages = JSON.parse(xhttp.responseText);
       

@@ -1,9 +1,7 @@
 const fs = require('fs')
 let path = require('path');
-
 let fileName = 'status.real'
 let orderedArray = [];
-
 
 // Reads data from a file
 function getData() {
@@ -25,8 +23,6 @@ function getPackageName (props){
     
     return temp3[1];
 }
-
-
 
 // Define a package object as a class
 class Package {
@@ -116,13 +112,9 @@ function processData(){
     // Make an array and store all package objects there.
     let packageArray = [];
     for(let i=0;i<dataArray.length;i++){
-        
-
         let name = getPackageName(dataArray[i]);
-        
         let package = new Package(name, dataArray[i]);
         packageArray.push(package);
-
     }
     
     // Get reverse dependencies for every package object.
@@ -132,10 +124,8 @@ function processData(){
             if(packageArray[j].getDepends().includes(pack.getName())){
                 pack.setRevDepends(packageArray[j].getName());
             }
-                
         }
     }
-
 
     // Remove packages from the end of the package array, that have no name.
     while (true){
@@ -146,12 +136,10 @@ function processData(){
         }
     }
 
-
     // Sort packages in the package array alphapetically
     packageArray.sort(function(a, b){
         return a.getName().localeCompare(b.getName());
     })
-
 
     // Create a formally ordered array out of the package array
     for(let i=0;i<packageArray.length;i++){
@@ -162,7 +150,6 @@ function processData(){
             revDepends: packageArray[i].getRevDepends()
         }
         orderedArray.push(orderedPackage);
-        
     }
 }
 
@@ -190,7 +177,7 @@ app.get('/packagehtml', (req, res) => {
 });
 
 
-// All packages
+// Returns all packages
 app.get('/packages', (req, res) => {
     if(orderedArray.length>0){
         res.status(200).json(orderedArray);
@@ -225,7 +212,7 @@ app.get('/packages/name', (req, res) => {
         }
 });
 
-// Receive a file from client and save it to the server.
+// Receive a file from client, save it to the server and use the file as data
 app.post('/upload/file', (req, res) => {
     if (!req.files){
         return res.status(400).send('No files were uploaded.');
@@ -235,13 +222,13 @@ app.post('/upload/file', (req, res) => {
         if (err){
             return res.status(500).send(err);
         }
-        // Use the data in the new file to create package data.
         fileName='fileLess.real';
         processData();
         return res.status(200).send('File uploaded!');
     })
 });
 
+// Use the example data
 app.get('/example', (req, res) => {
     fileName='status.real';
     processData();
