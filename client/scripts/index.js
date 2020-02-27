@@ -5,12 +5,12 @@ async function uploadFile(inp){
     formData.append("file", filu);
     let r = await fetch('/upload/file', {method: "POST", body: formData});
     console.log('HTTP response code:',r.status); 
-    window.location.href='http://localhost/list/';
+    window.location.href='/list/';
   }
 
   async function useExample(){
     let r = await fetch('/example/', {method: "GET"});
     console.log('HTTP response code:',r.status); 
-    window.location.href='http://localhost/list/';
+    window.location.href='/list/';
   }
     
