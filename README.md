@@ -5,9 +5,11 @@ On a Debian and Ubuntu systems, there is a file called /var/lib/dpkg/status that
 
 # Instructions
 
-    - npm install
+    - clone the repository
+
+    - $ npm install
     
-    - node App.js
+    - $ node App.js
 
 
 If you have a Debian / Ubuntu system, you can upload your own file. If not, you can use the example data.
