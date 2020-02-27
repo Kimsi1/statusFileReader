@@ -120,7 +120,10 @@ function processData(){
     // Make an array and store all package objects there.
     let packageArray = [];
     for(let i=0;i<dataArray.length;i++){
+        console.log(dataArray.length);
+
         let name = getPackageName(dataArray[i]);
+        console.log(name);
         let package = new Package(name, dataArray[i]);
         packageArray.push(package);
 
