@@ -48,21 +48,20 @@ let savePackageName=async(event, name)=>{
                   let splitList = package.toString().split('| ');
                   
                   for(let i=0;i<splitList.length;i++){
-                    // There might be a '\r' when the App is run in Windows OS, so it is removed.
-                    let key = splitList[i].split('\r')
+                    
                     // Remove whitespaces from the name.
-                    key[0]=key[0].replace(/\s/g, '');
+                    let key = splitList[i].replace(/\s/g, '');
                     // If the package name list includes the dependency name, create a link to it.
-                    if(allNames.includes(key[0])){
+                    if(allNames.includes(key)){
                       // If there are more items left, put a '|' character to the end
                       if(i<splitList.length-1){
                         const x = `
-                          <a href="/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
+                          <a href="/packagehtml" onclick="javascript:savePackageName(event, '${key}')">${key}</a> |
                         `
                         document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                       } else {
                         const x = `
-                          <a href="/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a>
+                          <a href="/packagehtml" onclick="javascript:savePackageName(event, '${key}')">${key}</a>
                         `
                         document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                       }
@@ -85,18 +84,16 @@ let savePackageName=async(event, name)=>{
 
                 } else {
                   // No pipe character was found in dependency entry.
-                  // There might be a '\r' when run in windows OS, so it is removed.
-                  let key = package.toString().split('\r')
                   // If the package name list includes the dependency name, create a link to it.
-                  if(allNames.includes(key[0])){
+                  if(allNames.includes(package.toString())){
                     const x = `
-                        <p><a href="/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a></p>
+                        <p><a href="/packagehtml" onclick="javascript:savePackageName(event, '${package.toString()}')">${package.toString()}</a></p>
                     `
                     document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                   } else {
                     // Name was not found in the package name list, so no link will be created.
                     const x = `
-                        <p>${key[0]}</p>
+                        <p>${package.toString()}</p>
                     `
                     document.getElementById('depends').innerHTML = document.getElementById('depends').innerHTML + x;
                   }  
