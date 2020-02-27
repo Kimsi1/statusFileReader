@@ -44,17 +44,17 @@ let savePackageName=async(event, name)=>{
               for (let package of myJson.depends) {
                 
                 // If there is a pipe character, deal with the linking.
-                if(package.toString().includes(' | ')){
-                  let splitList = package.toString().split(' | ');
+                if(package.toString().includes('| ')){
+                  let splitList = package.toString().split('| ');
                   
                   for(let i=0;i<splitList.length;i++){
-                    // There might be a '\r' when run in windows OS, so it is removed.
+                    // There might be a '\r' when the App is run in Windows OS, so it is removed.
                     let key = splitList[i].split('\r')
-                    // If the package name list includes the dependency name, create a link to the it.
+                    // Remove whitespaces from the name.
+                    key[0]=key[0].replace(/\s/g, '');
+                    // If the package name list includes the dependency name, create a link to it.
                     if(allNames.includes(key[0])){
-                      // If there are more items, put a '|' character to the end
-                      // TODO: '| ' does not work
-                    
+                      // If there are more items left, put a '|' character to the end
                       if(i<splitList.length-1){
                         const x = `
                           <a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a> |
@@ -68,6 +68,7 @@ let savePackageName=async(event, name)=>{
                       }
                     } else {
                       // Name was not found in the package name list, so no link will be created.
+                      // If there are more items left, put a '|' character to the end
                       if(i<splitList.length-1){
                         const x = `
                         ${splitList[i]} |
@@ -86,7 +87,7 @@ let savePackageName=async(event, name)=>{
                   // No pipe character was found in dependency entry.
                   // There might be a '\r' when run in windows OS, so it is removed.
                   let key = package.toString().split('\r')
-                  // If the package name list includes the dependency name, create a link to the it.
+                  // If the package name list includes the dependency name, create a link to it.
                   if(allNames.includes(key[0])){
                     const x = `
                         <p><a href="http://localhost:3000/packagehtml" onclick="javascript:savePackageName(event, '${key[0]}')">${key[0]}</a></p>
