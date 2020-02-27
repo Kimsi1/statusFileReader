@@ -102,6 +102,8 @@ function processData(){
 
     // Read the data and form it into an array.
     let data = getData().toString();
+    // Remove possible Windows OS carriage returns.
+    data = data.replace(/\r/g, "");
     let dataArray = [];
     // Check if the data contains at least 1 package text.
     if(data.includes('Package: ')){
