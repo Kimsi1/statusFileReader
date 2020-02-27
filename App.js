@@ -110,6 +110,7 @@ function processData(){
             dataArray = data.split('\r\n\r\n');
         } else {
             dataArray = data.split('\n\n');
+            console.log('THIS IS NON-WIN DATA ARRAY:'+dataArray);
         }
     } else {
         // If there was no package text, exit the function.
@@ -251,7 +252,7 @@ app.get('/example', (req, res) => {
 
 
 // Start the backend
-processData();
+// processData();
 //app.listen(port, () => console.log(`App listening on port ${port}!`))
 app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
 
