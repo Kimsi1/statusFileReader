@@ -248,6 +248,6 @@ app.get('/example', (req, res) => {
 
 // Start the backend
 processData();
-// app.listen(port, () => console.log(`App listening on port ${port}!`))
-app.listen(process.env.PORT || 3000)
+//app.listen(port, () => console.log(`App listening on port ${port}!`))
+app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
 
