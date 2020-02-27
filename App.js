@@ -9,7 +9,7 @@ let orderedArray = [];
 function getData() {
     try {
         const data = fs.readFileSync(fileName, 'utf8');
-        console.log(data);
+        
         return data;
         
       } catch (err) {
@@ -125,7 +125,7 @@ function processData(){
         packageArray.push(package);
 
     }
-
+    console.log('THIS IS packagearray:'+packageArray);
     // Get reverse dependencies for every package object.
     for(let i=0;i<packageArray.length;i++){
         let pack = packageArray[i];
