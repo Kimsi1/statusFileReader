@@ -8,7 +8,7 @@ let savePackageName=async(event, name)=>{
   }
 
   const loadPackages = () => {
-    // Get all of the packages from backend and save their names on an array.
+    // Get all of the packages from backend, check if a package can be found and make the package names links in the page.
     fetch('/packages/', {method: "GET"}).then((response) => {
         return response.json();
       })
