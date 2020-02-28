@@ -6,20 +6,17 @@ let savePackageName=async(event, name)=>{
     });
 
   }
-  
-  // TODO: XMLHTTPrequest gives an error in the console.
+
   const loadPackages = () => {
-      const xhttp = new XMLHttpRequest();
-
-      xhttp.open("GET", "/packages", false);
-      xhttp.send();
-
-      const packages = JSON.parse(xhttp.responseText);
-      
-      if(packages.name==='NOT FOUND'){
-        const x = '<h3>Could not find any Packages. Please check your uploaded file, or use the example data.</h3>'
-        document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
-      } else {
+    // Get all of the packages from backend and save their names on an array.
+    fetch('/packages/', {method: "GET"}).then((response) => {
+        return response.json();
+      })
+      .then((packages) => {
+        if(packages.name==='NOT FOUND'){
+          const x = '<h3>Could not find any Packages. Please check your uploaded file, or use the example data.</h3>'
+          document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
+        } else {
 
         for (let package of packages) {
             const x = `
@@ -28,6 +25,6 @@ let savePackageName=async(event, name)=>{
             document.getElementById('packages').innerHTML = document.getElementById('packages').innerHTML + x;
         }
       }
+    })
   }
-
   loadPackages();
