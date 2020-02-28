@@ -1,7 +1,7 @@
 const x = '<div class="loader" id="loader"></div>'
 
 
-async function uploadFile(inp){
+  async function uploadFile(inp){
     document.getElementById('content').innerHTML = document.getElementById('content').innerHTML + x;
     let filu = inp.files[0];
     let formData = new FormData();

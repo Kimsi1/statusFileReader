@@ -22,7 +22,6 @@ body {
 .inputfile + label {
     max-width: 80%;
     font-size: 1.25rem;
-    /* 20px */
     font-weight: 700;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -30,19 +29,12 @@ body {
     display: inline-block;
     overflow: hidden;
     padding: 0.625rem 1.25rem;
-    /* 10px 20px */
 }
-
 
 .inputfile:focus + label,
 .inputfile.has-focus + label {
     outline: 1px dotted #000;
     outline: -webkit-focus-ring-color auto 5px;
-}
-
-.inputfile + label * {
-    /* pointer-events: none; */
-    /* in case of FastClick lib use */
 }
 
 .inputfile + label svg {
@@ -51,9 +43,7 @@ body {
     vertical-align: middle;
     fill: currentColor;
     margin-top: -0.25em;
-    /* 4px */
     margin-right: 0.25em;
-    /* 4px */
 }
 
 
@@ -89,7 +79,6 @@ body {
     fill: #f1e5e6;
 }
 
-/* style 5 */
 
 .inputfile-5 + label {
     color: #d3394c;
@@ -152,8 +141,8 @@ body {
 .loader {
     position:fixed;
     left:45%;
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #d3394c; /* Blue */
+    border: 16px solid #f3f3f3; 
+    border-top: 16px solid #d3394c; 
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -166,5 +155,5 @@ body {
 }
 
 .hide-loader{
-display:none;
+    display:none;
 }
